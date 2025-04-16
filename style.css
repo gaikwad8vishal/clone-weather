@@ -1,0 +1,54 @@
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background: #e0f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('https://images.unsplash.com/photo-1589724189661-1f593f4606d6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.weather-container {
+  background: #ffffff;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.weather-container {
+  background-color: rgba(255, 255, 255, 0.3); /* 30% white transparency */
+  padding: 2em;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  backdrop-filter: blur(5px); /* Optional: adds blur behind the box */
+  -webkit-backdrop-filter: blur(5px); /* For Safari support */
+}
+
+
+input {
+  padding: 0.5em;
+  width: 70%;
+  margin-bottom: 1em;
+}
+
+button {
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+#weatherResult {
+  margin-top: 1em;
+}
