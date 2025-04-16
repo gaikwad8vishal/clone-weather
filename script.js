@@ -1,13 +1,59 @@
-const apiKey = '83243cf38037ea9eef649a5a2340d965'; // Replace with your actual API key
+const apiKey = '83243cf38037ea9eef649a5a2340d965';
 
+// Focus input on load
+window.onload = () => {
+  document.getElementById('cityInput').focus();
+};
+
+// Function to update background based on weather condition
+function updateBackground(main, description, iconCode) {
+  const body = document.body;
+  body.className = ''; // Reset
+
+  const isNight = iconCode.includes('n');
+  const desc = description.toLowerCase();
+  const condition = main.toLowerCase();
+
+  if (condition === 'rain' || condition === 'drizzle' || desc.includes('rain')) {
+    body.classList.add(isNight ? 'rainy-night' : 'rainy-day');
+  } else if (condition === 'clouds' || desc.includes('cloud')) {
+    body.classList.add(isNight ? 'cloudy-night' : 'cloudy-day');
+  } else if (condition === 'clear' || desc.includes('sun') || desc.includes('clear')) {
+    body.classList.add(isNight ? 'sunny-night' : 'sunny-day');
+  } else if (condition === 'snow' || desc.includes('snow')) {
+    body.classList.add(isNight ? 'snowy-night' : 'snowy-day');
+  } else if (
+    condition === 'mist' || condition === 'fog' || 
+    condition === 'haze' || condition === 'smoke' || 
+    desc.includes('mist') || desc.includes('haze') || desc.includes('fog')
+  ) {
+    body.classList.add(isNight ? 'foggy-night' : 'foggy-day');
+  } else {
+    body.classList.add(isNight ? 'cloudy-night' : 'cloudy-day'); // fallback
+  }
+}
+
+// Show the weather result with smooth fade-in
+function showWeatherResult(html) {
+  const weatherResult = document.getElementById('weatherResult');
+  weatherResult.classList.remove('show');
+  setTimeout(() => {
+    weatherResult.innerHTML = html;
+    weatherResult.classList.add('show');
+  }, 100);
+}
+
+// Fetch and display weather
 async function getWeather() {
-  const city = document.getElementById('cityInput').value;
+  const city = document.getElementById('cityInput').value.trim();
   const weatherResult = document.getElementById('weatherResult');
 
   if (!city) {
-    weatherResult.innerHTML = `<p>Please enter a city name.</p>`;
+    showWeatherResult(`<p>Please enter a city name.</p>`);
     return;
   }
+
+  showWeatherResult(`<p>Fetching weather...</p>`);
 
   try {
     const response = await fetch(
@@ -17,43 +63,24 @@ async function getWeather() {
     if (!response.ok) {
       throw new Error('City not found');
     }
-    function updateBackground(weather) {
-        const body = document.body;
-      
-        // Reset background classes
-        body.className = '';
-      
-        if (weather.includes('cloud')) {
-          body.classList.add('cloudy-bg');
-        } else if (weather.includes('sun') || weather.includes('clear')) {
-          body.classList.add('sunny-bg');
-        } else if (weather.includes('rain')) {
-          body.classList.add('rainy-bg');
-        } else {
-          body.classList.add('default-bg');
-        }
-      }
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY`)
-  .then(response => response.json())
-  .then(data => {
-    const weatherDescription = data.weather[0].description.toLowerCase();
-    updateBackground(weatherDescription);
-  });
-
-      
 
     const data = await response.json();
     const { name, main, weather } = data;
     const icon = weather[0].icon;
+    const description = weather[0].description;
+    const mainCondition = weather[0].main;
 
-    weatherResult.innerHTML = `
-      <h2>${name}</h2>
+    updateBackground(mainCondition, description, icon);
+
+    const resultHTML = `
+      <h2>${name}</h2>  
       <p><strong>${main.temp}°C</strong></p>
-      <p>${weather[0].description}</p>
+      <p>${description}</p>
       <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="Weather Icon">
     `;
+
+    showWeatherResult(resultHTML);
   } catch (error) {
-    weatherResult.innerHTML = `<p>Error: ${error.message}</p>`;
+    showWeatherResult(`<p>Error: ${error.message}</p>`);
   }
 }
-

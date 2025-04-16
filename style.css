@@ -1,14 +1,5 @@
 body {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background: #e0f7fa;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-body {
   font-family: Arial, sans-serif;
-  background-image: url('https://images.unsplash.com/photo-1589724189661-1f593f4606d6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -17,38 +8,229 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-image 0.5s ease-in-out;
 }
+
+.sunny-day    { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUkCILQah3QbA_wM4bkbeef65ahTVMKfByXQ&s'); }
+.sunny-night  { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuRfJWtyBopBd83phpM12QPHYXRcVv--HQQw&s'); }
+.rainy-day    { background-image: url('https://media.istockphoto.com/id/1476190237/photo/summer-rain-raindrops-bad-weather-depression.jpg?s=612x612&w=0&k=20&c=GUJvhhU3WVvHhJ3kU4E33fVUzICegLq1sh2msWS5kNk='); }
+.rainy-night  { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1p4hTnwCJl9j_WJwGuLo4FiNVjMSOHJjRzA&s'); }
+.cloudy-day   { background-image: url('https://i0.wp.com/bleuwater.me/wp-content/uploads/2022/03/Screen-Shot-2022-03-06-at-12.04.46-PM.png?ssl=1'); }
+.cloudy-night { background-image: url('https://www.shutterstock.com/image-photo/space-night-sky-cloud-stars-600nw-478252834.jpg'); }
+.snowy-day    { background-image: url('https://media.istockphoto.com/id/629653980/photo/snowman.jpg?s=612x612&w=0&k=20&c=Mbsnibgwa0VuiwcJQLrzchvPqWnI9GIYVFdGPttx4eE='); }
+.snowy-night  { background-image: url('https://media.istockphoto.com/id/929147342/photo/starry-winter-night.jpg?s=612x612&w=0&k=20&c=DR62yY3ytV75ibrpO_gM0u4QwswVZbEiO0zgB22XmTY='); }
+.foggy-day    { background-image: url('https://www.shutterstock.com/image-photo/mountain-road-winter-on-overcast-260nw-287055386.jpg'); }
+.foggy-night  { background-image: url('https://images.unsplash.com/photo-1668532070436-75b44a9a1158?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bmlnaHQlMjBmb2d8ZW58MHx8MHx8fDA%3D'); }
 
 
 .weather-container {
-  background: #ffffff;
-  padding: 2em;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 2.5em 2em;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
   text-align: center;
-}
-.weather-container {
-  background-color: rgba(255, 255, 255, 0.3); /* 30% white transparency */
-  padding: 2em;
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  backdrop-filter: blur(5px); /* Optional: adds blur behind the box */
-  -webkit-backdrop-filter: blur(5px); /* For Safari support */
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
 
+/* Center align input text and adjust vertical alignment */
 input {
-  padding: 0.5em;
-  width: 70%;
+  padding: 0.6em;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  text-align: center; /* This aligns the text inside the input field */
+  outline: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 1rem;
   margin-bottom: 1em;
+  box-sizing: border-box; /* Ensure padding doesn’t overflow the input box */
+  line-height: 1.5; /* Adjust vertical alignment of text */
+}
+
+/* Placeholder color */
+input::placeholder {
+  color: #e0e0e0;
+}
+
+/* Focus state for the input */
+input:focus {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 2px rgba(102, 166, 255, 0.4);
+}
+
+
+button {
+  padding: 0.8em 1.6em;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 166, 255, 0.4);
+  transition: all 0.3s ease;
+  font-size: 1rem; /* Adjust font size */
+  width: 100%; /* Full width for better mobile experience */
+  margin-top: 10px; /* Add some space between button and input */
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(102, 166, 255, 0.6);
+}
+
+
+/* Weather result */
+#weatherResult {
+  margin-top: 1.5em;
+  font-size: 1rem;
+  line-height: 1.6;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+  padding: 0 10px; 
+}
+
+
+
+
+
+.weather-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 0;
+  pointer-events: none; 
+}
+
+
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+  z-index: -1;
+}
+
+
+@media (max-width: 480px) {
+  .weather-container {
+    padding: 1.5em 1em;
+    border-radius: 15px;
+  }
+
+  input, button {
+    width: 100%;
+  }
+}
+
+
+
+/* Adjust weather container for mobile screens */
+.weather-container {
+  padding: 2em 2em;
+  max-width: 400px; /* Ensure the container doesn’t exceed 100% width on small screens */
+  width: 90%; /* Makes sure it adapts well */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  text-align: center;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Input and button styles (Mobile responsive improvements) */
+input {
+  padding: 0.8em;
+  width: 100%; /* Full width for better mobile experience */
+  font-size: 1rem; /* Adjust font size for mobile */
 }
 
 button {
-  padding: 0.5em 1em;
-  cursor: pointer;
+  padding: 0.8em 1.6em;
+  font-size: 1rem; /* Adjust font size */
+  width: 100%; /* Full width for better mobile experience */
+  margin-top: 10px; /* Add some space between button and input */
 }
 
+/* Weather result */
 #weatherResult {
-  margin-top: 1em;
+  margin-top: 1.5em;
+  font-size: 1rem; /* Adjust font size */
+  line-height: 1.6;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+  padding: 0 10px; /* Add padding for better readability on smaller screens */
+}
+
+/* Mobile-friendly media queries */
+@media (max-width: 768px) {
+  .weather-container {
+    padding: 2em 1.5em; /* Slightly reduce padding */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Adjust heading size for mobile */
+  }
+
+  p {
+    font-size: 1rem; /* Ensure paragraphs are appropriately sized */
+  }
+
+  img {
+    width: 50px; /* Adjust image size for better mobile display */
+    height: 50px;
+  }
+
+  input, button {
+    font-size: 1rem; /* Ensure buttons and inputs have consistent font size */
+  }
+}
+
+/* Smallest mobile screen adjustments */
+@media (max-width: 480px) {
+  .weather-container {
+    padding: 1.5em 1em;
+    border-radius: 15px; /* Round corners slightly more on smaller screens */
+  }
+
+  input, button {
+    width: 100%; /* Full-width input and button */
+    font-size: 1.1rem; /* Increase font size for easier tap on small screens */
+  }
+
+  h2 {
+    font-size: 1.2rem; /* Adjust heading size */
+  }
+
+  p {
+    font-size: 0.9rem; /* Adjust text for readability */
+  }
+
+  #weatherResult {
+    font-size: 0.9rem; /* Adjust result text size */
+    line-height: 1.5;
+    padding: 0 5px; /* Padding for better readability */
+  }
 }
